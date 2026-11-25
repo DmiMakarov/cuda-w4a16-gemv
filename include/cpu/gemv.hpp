@@ -4,7 +4,7 @@
 #include <span>
 #include <cstdint>
 
-#include "cpu/matrix_quant_view.hpp"
+#include "matrix_quant_view.hpp"
 
 namespace quant::cpu
 {
