@@ -1,0 +1,67 @@
+---------------------------------------------------------------------------------------------------------------------------------
+Benchmark                                                                       Time             CPU   Iterations UserCounters...
+---------------------------------------------------------------------------------------------------------------------------------
+w4a16_naive/2048x2048/G32/min_warmup_time:0.100/real_time_mean               47.4 us         47.4 us           10 MB=2.49037 bytes/s=52.5571G/s pct_copy_bw=6.30365/s
+w4a16_naive/2048x2048/G32/min_warmup_time:0.100/real_time_median             47.3 us         47.3 us           10 MB=2.49037 bytes/s=52.6787G/s pct_copy_bw=6.31823/s
+w4a16_naive/2048x2048/G32/min_warmup_time:0.100/real_time_stddev            0.405 us        0.405 us           10 MB=0 bytes/s=440.647M/s pct_copy_bw=0.0528507/s
+w4a16_naive/2048x2048/G32/min_warmup_time:0.100/real_time_cv                 0.86 %          0.86 %            10 MB=0.00% bytes/s=0.84% pct_copy_bw=0.84%
+w4a16_warp/2048x2048/G32/min_warmup_time:0.100/real_time_mean                10.7 us         10.7 us           10 MB=2.49037 bytes/s=233.216G/s pct_copy_bw=27.9716/s
+w4a16_warp/2048x2048/G32/min_warmup_time:0.100/real_time_median              10.7 us         10.7 us           10 MB=2.49037 bytes/s=233.214G/s pct_copy_bw=27.9714/s
+w4a16_warp/2048x2048/G32/min_warmup_time:0.100/real_time_stddev             0.029 us        0.029 us           10 MB=0 bytes/s=637.474M/s pct_copy_bw=0.0764579/s
+w4a16_warp/2048x2048/G32/min_warmup_time:0.100/real_time_cv                  0.27 %          0.27 %            10 MB=0.00% bytes/s=0.27% pct_copy_bw=0.27%
+w4a16_warp_xvec/2048x2048/G32/min_warmup_time:0.100/real_time_mean           8.94 us         8.93 us           10 MB=2.49037 bytes/s=278.713G/s pct_copy_bw=33.4285/s
+w4a16_warp_xvec/2048x2048/G32/min_warmup_time:0.100/real_time_median         8.94 us         8.93 us           10 MB=2.49037 bytes/s=278.697G/s pct_copy_bw=33.4267/s
+w4a16_warp_xvec/2048x2048/G32/min_warmup_time:0.100/real_time_stddev        0.013 us        0.013 us           10 MB=0 bytes/s=393.251M/s pct_copy_bw=0.0471661/s
+w4a16_warp_xvec/2048x2048/G32/min_warmup_time:0.100/real_time_cv             0.14 %          0.14 %            10 MB=0.00% bytes/s=0.14% pct_copy_bw=0.14%
+w4a16_warp_w4/2048x2048/G32/min_warmup_time:0.100/real_time_mean             8.43 us         8.43 us           10 MB=2.49037 bytes/s=295.304G/s pct_copy_bw=35.4185/s
+w4a16_warp_w4/2048x2048/G32/min_warmup_time:0.100/real_time_median           8.43 us         8.43 us           10 MB=2.49037 bytes/s=295.26G/s pct_copy_bw=35.4131/s
+w4a16_warp_w4/2048x2048/G32/min_warmup_time:0.100/real_time_stddev          0.008 us        0.008 us           10 MB=0 bytes/s=289.244M/s pct_copy_bw=0.0346916/s
+w4a16_warp_w4/2048x2048/G32/min_warmup_time:0.100/real_time_cv               0.10 %          0.10 %            10 MB=0.00% bytes/s=0.10% pct_copy_bw=0.10%
+cublas_fp16/2048x2048/G32/min_warmup_time:0.100/real_time_mean               21.3 us         21.3 us           10 MB=8.38861 bytes/s=393.53G/s pct_copy_bw=47.1996/s
+cublas_fp16/2048x2048/G32/min_warmup_time:0.100/real_time_median             21.3 us         21.3 us           10 MB=8.38861 bytes/s=393.56G/s pct_copy_bw=47.2032/s
+cublas_fp16/2048x2048/G32/min_warmup_time:0.100/real_time_stddev            0.026 us        0.026 us           10 MB=0 bytes/s=475.626M/s pct_copy_bw=0.0570461/s
+cublas_fp16/2048x2048/G32/min_warmup_time:0.100/real_time_cv                 0.12 %          0.12 %            10 MB=0.00% bytes/s=0.12% pct_copy_bw=0.12%
+cublas_fp32/2048x2048/G32/min_warmup_time:0.100/real_time_mean               30.2 us         30.2 us           10 MB=16.7772 bytes/s=556.045G/s pct_copy_bw=66.6915/s
+cublas_fp32/2048x2048/G32/min_warmup_time:0.100/real_time_median             30.2 us         30.1 us           10 MB=16.7772 bytes/s=556.347G/s pct_copy_bw=66.7277/s
+cublas_fp32/2048x2048/G32/min_warmup_time:0.100/real_time_stddev            0.075 us        0.075 us           10 MB=0 bytes/s=1.37185G/s pct_copy_bw=0.164538/s
+cublas_fp32/2048x2048/G32/min_warmup_time:0.100/real_time_cv                 0.25 %          0.25 %            10 MB=0.00% bytes/s=0.25% pct_copy_bw=0.25%
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_mean                  515 us          514 us           10 MB=2.49037 bytes/s=4.83998G/s
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_median                515 us          514 us           10 MB=2.49037 bytes/s=4.84009G/s
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_stddev              0.041 us        0.039 us           10 MB=0 bytes/s=383.154k/s
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_cv                   0.01 %          0.01 %            10 MB=0.00% bytes/s=0.01%
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_mean               1448 us         1448 us           10 MB=8.38861 bytes/s=5.79232G/s
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_median             1448 us         1448 us           10 MB=8.38861 bytes/s=5.79235G/s
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_stddev            0.037 us        0.046 us           10 MB=0 bytes/s=148.595k/s
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_cv                 0.00 %          0.00 %            10 MB=0.00% bytes/s=0.00%
+w4a16_naive/16384x16384/G32/min_warmup_time:0.100/real_time_mean              784 us          784 us           10 MB=159.384 bytes/s=203.343G/s pct_copy_bw=24.3887/s
+w4a16_naive/16384x16384/G32/min_warmup_time:0.100/real_time_median            784 us          784 us           10 MB=159.384 bytes/s=203.354G/s pct_copy_bw=24.39/s
+w4a16_naive/16384x16384/G32/min_warmup_time:0.100/real_time_stddev           3.41 us         3.41 us           10 MB=0 bytes/s=883.649M/s pct_copy_bw=0.105984/s
+w4a16_naive/16384x16384/G32/min_warmup_time:0.100/real_time_cv               0.43 %          0.44 %            10 MB=0.00% bytes/s=0.43% pct_copy_bw=0.43%
+w4a16_warp/16384x16384/G32/min_warmup_time:0.100/real_time_mean               285 us          285 us           10 MB=159.384 bytes/s=558.361G/s pct_copy_bw=66.9692/s
+w4a16_warp/16384x16384/G32/min_warmup_time:0.100/real_time_median             286 us          286 us           10 MB=159.384 bytes/s=558.054G/s pct_copy_bw=66.9323/s
+w4a16_warp/16384x16384/G32/min_warmup_time:0.100/real_time_stddev           0.471 us        0.472 us           10 MB=0 bytes/s=922.91M/s pct_copy_bw=0.110693/s
+w4a16_warp/16384x16384/G32/min_warmup_time:0.100/real_time_cv                0.17 %          0.17 %            10 MB=0.00% bytes/s=0.17% pct_copy_bw=0.17%
+w4a16_warp_xvec/16384x16384/G32/min_warmup_time:0.100/real_time_mean          201 us          201 us           10 MB=159.384 bytes/s=794.742G/s pct_copy_bw=95.3205/s
+w4a16_warp_xvec/16384x16384/G32/min_warmup_time:0.100/real_time_median        201 us          200 us           10 MB=159.384 bytes/s=794.797G/s pct_copy_bw=95.3271/s
+w4a16_warp_xvec/16384x16384/G32/min_warmup_time:0.100/real_time_stddev      0.327 us        0.326 us           10 MB=0 bytes/s=1.29512G/s pct_copy_bw=0.155335/s
+w4a16_warp_xvec/16384x16384/G32/min_warmup_time:0.100/real_time_cv           0.16 %          0.16 %            10 MB=0.00% bytes/s=0.16% pct_copy_bw=0.16%
+w4a16_warp_w4/16384x16384/G32/min_warmup_time:0.100/real_time_mean            196 us          196 us           10 MB=159.384 bytes/s=812.937G/s pct_copy_bw=97.5027/s
+w4a16_warp_w4/16384x16384/G32/min_warmup_time:0.100/real_time_median          196 us          196 us           10 MB=159.384 bytes/s=812.965G/s pct_copy_bw=97.5062/s
+w4a16_warp_w4/16384x16384/G32/min_warmup_time:0.100/real_time_stddev        0.102 us        0.101 us           10 MB=0 bytes/s=421.949M/s pct_copy_bw=0.0506081/s
+w4a16_warp_w4/16384x16384/G32/min_warmup_time:0.100/real_time_cv             0.05 %          0.05 %            10 MB=0.00% bytes/s=0.05% pct_copy_bw=0.05%
+cublas_fp16/16384x16384/G32/min_warmup_time:0.100/real_time_mean              706 us          705 us           10 MB=536.871 bytes/s=760.997G/s pct_copy_bw=91.2731/s
+cublas_fp16/16384x16384/G32/min_warmup_time:0.100/real_time_median            706 us          705 us           10 MB=536.871 bytes/s=760.955G/s pct_copy_bw=91.268/s
+cublas_fp16/16384x16384/G32/min_warmup_time:0.100/real_time_stddev           4.17 us         4.18 us           10 MB=0 bytes/s=4.50206G/s pct_copy_bw=0.539972/s
+cublas_fp16/16384x16384/G32/min_warmup_time:0.100/real_time_cv               0.59 %          0.59 %            10 MB=0.00% bytes/s=0.59% pct_copy_bw=0.59%
+cublas_fp32/16384x16384/G32/min_warmup_time:0.100/real_time_mean             1215 us         1215 us           10 MB=1.07374k bytes/s=883.458G/s pct_copy_bw=105.961/s
+cublas_fp32/16384x16384/G32/min_warmup_time:0.100/real_time_median           1215 us         1215 us           10 MB=1.07374k bytes/s=883.454G/s pct_copy_bw=105.961/s
+cublas_fp32/16384x16384/G32/min_warmup_time:0.100/real_time_stddev          0.066 us        0.062 us           10 MB=0 bytes/s=47.9702M/s pct_copy_bw=5.75349m/s
+cublas_fp32/16384x16384/G32/min_warmup_time:0.100/real_time_cv               0.01 %          0.01 %            10 MB=0.00% bytes/s=0.01% pct_copy_bw=0.01%
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_mean              26465 us        26449 us           10 MB=159.384 bytes/s=6.02243G/s
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_median            26465 us        26449 us           10 MB=159.384 bytes/s=6.02246G/s
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_stddev            0.664 us        0.897 us           10 MB=0 bytes/s=151.153k/s
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_cv                 0.00 %          0.00 %            10 MB=0.00% bytes/s=0.00%
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_mean            89346 us        89291 us           10 MB=536.871 bytes/s=6.00893G/s
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_median          89345 us        89290 us           10 MB=536.871 bytes/s=6.00894G/s
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_stddev           1.27 us         2.23 us           10 MB=0 bytes/s=85.431k/s
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_cv               0.00 %          0.00 %            10 MB=0.00% bytes/s=0.00%

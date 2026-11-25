@@ -1,0 +1,19 @@
+-----------------------------------------------------------------------------------------------------------------------------
+Benchmark                                                                   Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------------------------------------------
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_mean              515 us          515 us            5 MB=2.49037 bytes/s=4.83836G/s
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_median            515 us          515 us            5 MB=2.49037 bytes/s=4.83881G/s
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_stddev          0.101 us        0.107 us            5 MB=33.32n bytes/s=950.974k/s
+Upload/w4/2048x2048/G32/min_warmup_time:0.100/real_time_cv               0.02 %          0.02 %             5 MB=0.00% bytes/s=0.02%
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_mean           1449 us         1448 us            5 MB=8.38861 bytes/s=5.79071G/s
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_median         1448 us         1448 us            5 MB=8.38861 bytes/s=5.79129G/s
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_stddev        0.388 us        0.355 us            5 MB=0 bytes/s=1.55158M/s
+Upload/fp16/2048x2048/G32/min_warmup_time:0.100/real_time_cv             0.03 %          0.02 %             5 MB=0.00% bytes/s=0.03%
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_mean          26462 us        26445 us            5 MB=159.384 bytes/s=6.02312G/s
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_median        26462 us        26445 us            5 MB=159.384 bytes/s=6.02321G/s
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_stddev         1.20 us        0.937 us            5 MB=2.13248u bytes/s=273.753k/s
+Upload/w4/16384x16384/G32/min_warmup_time:0.100/real_time_cv             0.00 %          0.00 %             5 MB=0.00% bytes/s=0.00%
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_mean        89319 us        89263 us            5 MB=536.871 bytes/s=6.01075G/s
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_median      89319 us        89264 us            5 MB=536.871 bytes/s=6.01074G/s
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_stddev       1.15 us         4.56 us            5 MB=0 bytes/s=77.1898k/s
+Upload/fp16/16384x16384/G32/min_warmup_time:0.100/real_time_cv           0.00 %          0.01 %             5 MB=0.00% bytes/s=0.00%
