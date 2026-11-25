@@ -34,7 +34,7 @@ void gemv_warp_w4_kernel(quant::MatrixQuantView m, const std::uint16_t* __restri
 
         float acc = 0;
 
-        for(std::uint32_t kq = lane; kq < words; kq += 32)
+        for(std::uint32_t kq = lane; kq < quads; kq += 32)
         {
             float sum = 0.0f;
 
