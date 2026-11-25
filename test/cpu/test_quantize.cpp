@@ -1,7 +1,6 @@
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
-#include <random>
 #include <stdexcept>
 #include <vector>
 
@@ -9,58 +8,20 @@
 
 #include "cpu/float_fp16.hpp"
 #include "cpu/quantize.hpp"
+#include "test_utils.hpp"
 
-using quant::MatrixQuantView;
 using quant::cpu::fp16_bits_to_float;
 using quant::cpu::quantize;
 
 namespace
 {
 
-std::size_t group_index(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    return i * (m.cols / m.G) + j / m.G;
-}
+using test_utils::Params;
+using test_utils::dequantize_at;
+using test_utils::make_input;
+using test_utils::scale_at;
 
-std::uint32_t code_at(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    return (m.w[i * m.w_stride + j / 8] >> (4 * (j % 8))) & 0xFu;
-}
-
-float scale_at(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    return fp16_bits_to_float(m.s[group_index(m, i, j)]);
-}
-
-float dequantize_at(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    const int q = static_cast<int>(code_at(m, i, j));
-    const int z = m.z[group_index(m, i, j)];
-    return scale_at(m, i, j) * static_cast<float>(q - z);
-}
-
-struct Params
-{
-    std::uint32_t rows;
-    std::uint32_t cols;
-    std::uint32_t G;
-    float mean;
-    float sd;
-};
-
-class QuantizeRandom : public ::testing::TestWithParam<Params>
-{
-protected:
-    static std::vector<float> make_input(const Params& p)
-    {
-        std::mt19937 rng(42);
-        std::normal_distribution<float> dist(p.mean, p.sd);
-        std::vector<float> a(static_cast<std::size_t>(p.rows) * p.cols);
-        for(float& v : a)
-            v = dist(rng);
-        return a;
-    }
-};
+class QuantizeRandom : public ::testing::TestWithParam<Params> {};
 
 } // namespace
 

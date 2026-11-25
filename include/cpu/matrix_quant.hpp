@@ -43,6 +43,6 @@ struct MatrixQuant
     MatrixQuantView view() const && = delete;
 };
 
-} //quant::cpu
+} //namespace quant::cpu
 
 #endif //QUANT_CPU_MATRIX_QUANT

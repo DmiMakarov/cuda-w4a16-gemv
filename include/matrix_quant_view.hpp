@@ -28,6 +28,6 @@ struct MatrixQuantView
     std::uint32_t w_stride;
 };
 
-} //quant
+} //namespace quant
 
 #endif //QUANT_MATRIX_QUANT_VIEW

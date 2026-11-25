@@ -12,6 +12,6 @@ namespace quant::cpu
 
 MatrixQuant quantize(std::span<const float> a, std::uint32_t rows, std::uint32_t cols, std::uint32_t G);
 
-} //quant::cpu
+} //namespace quant::cpu
 
 #endif //QUANT_CPU_QUANTIZE

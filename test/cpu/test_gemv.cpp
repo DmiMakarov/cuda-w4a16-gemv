@@ -1,5 +1,4 @@
 #include <vector>
-#include <random>
 #include <cstddef>
 #include <cstdint>
 #include <cmath>
@@ -12,54 +11,16 @@
 #include "cpu/matrix_quant.hpp"
 #include "matrix_quant_view.hpp"
 #include "cpu/quantize.hpp"
+#include "test_utils.hpp"
 
-using quant::MatrixQuantView;
 using quant::cpu::fp16_bits_to_float;
-using quant::cpu::float_to_fp16_bits;
 
 namespace
 {
 
-std::size_t group_index(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    return i * (m.cols / m.G) + j / m.G;
-}
-
-std::uint32_t code_at(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    return (m.w[i * m.w_stride + j / 8] >> (4 * (j % 8))) & 0xFu;
-}
-
-float scale_at(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    return fp16_bits_to_float(m.s[group_index(m, i, j)]);
-}
-
-float dequantize_at(const MatrixQuantView& m, std::size_t i, std::size_t j)
-{
-    const int q = static_cast<int>(code_at(m, i, j));
-    const int z = m.z[group_index(m, i, j)];
-    return scale_at(m, i, j) * static_cast<float>(q - z);
-}
-
-struct Params
-{
-    std::uint32_t rows;
-    std::uint32_t cols;
-    std::uint32_t G;
-    float mean;
-    float sd;
-};
-
-std::vector<float> make_input(const Params& p)
-{
-    std::mt19937 rng(42);
-    std::normal_distribution<float> dist(p.mean, p.sd);
-    std::vector<float> a(static_cast<std::size_t>(p.rows) * p.cols);
-    for(float& v : a)
-        v = dist(rng);
-    return a;
-}
+using test_utils::Params;
+using test_utils::dequantize_at;
+using test_utils::make_input;
 
 class GEMV : public ::testing::TestWithParam<Params> {};
 
@@ -74,14 +35,7 @@ TEST_P(GEMV, MatchesDequantizedReference)
     const auto v = m.view();
 
     std::vector<float> y(p.rows);
-    std::vector<std::uint16_t> x(p.cols);
-    std::mt19937 rng(7);  // not the seed of make_input, otherwise x repeats row 0
-    std::normal_distribution<float> dist(0.0f, 1.0f);
-
-    for(std::size_t i = 0; i < p.cols; i++)
-    {
-        x[i] = float_to_fp16_bits(dist(rng));
-    }
+    const auto x = test_utils::make_x(p.cols);
 
     quant::cpu::gemv(v, x, y);
     
