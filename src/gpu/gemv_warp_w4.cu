@@ -47,9 +47,9 @@ void gemv_warp_w4_kernel(quant::MatrixQuantView m, const std::uint16_t* __restri
             const std::uint32_t words[4] = {w4.x, w4.y, w4.z, w4.w};
 
             #pragma unroll
-            for(std::uint32_t = 0; t < 4; t++)
+            for(std::uint32_t t = 0; t < 4; t++)
             {
-                const uint4 x8 = xv[k];
+                const uint4 x8 = xv[4 * kq + t];
                 const std::uint32_t xw[4] = {x8.x, x8.y, x8.z, x8.w};
 
                 #pragma unroll
