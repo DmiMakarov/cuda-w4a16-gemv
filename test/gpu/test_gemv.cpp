@@ -13,6 +13,8 @@
 #include "gpu/device_buffer.hpp"
 #include "gpu/gemv_naive.hpp"
 #include "gpu/gemv_warp.hpp"
+#include "gpu/gemv_warp_w4.hpp"
+#include "gpu/gemv_warp_xvec.hpp"
 #include "gpu/gpu_test.hpp"
 #include "test_utils.hpp"
 
@@ -48,11 +50,14 @@ struct Kernel
 {
     const char* name;
     GemvFn fn;
+    std::uint32_t g_multiple;  // G must be divisible by this
 };
 
 const Kernel kernels[] = {
-    {"naive", quant::gpu::gemv_naive},
-    {"warp", quant::gpu::gemv_warp},
+    {"naive", quant::gpu::gemv_naive, 8},
+    {"warp", quant::gpu::gemv_warp, 8},
+    {"warp_xvec", quant::gpu::gemv_warp_xvec, 8},
+    {"warp_w4", quant::gpu::gemv_warp_w4, 32},
 };
 
 class GpuGemv : public ::testing::TestWithParam<Params> {};
@@ -73,6 +78,9 @@ TEST_P(GpuGemv, MatchesCpu)
 
     for(const Kernel& k : kernels)
     {
+        if(p.G % k.g_multiple != 0)
+            continue;
+
         const auto y = run(k.fn, m, x);
         for(std::size_t i = 0; i < p.rows; i++)
         {
@@ -91,6 +99,8 @@ INSTANTIATE_TEST_SUITE_P(Shapes, GpuGemv,
                          ::testing::Values(Params{7, 1000, 8, 0.0f, 1.0f},       // padding, few rows
                                            Params{300, 1024, 32, 0.0f, 0.02f},   // rows not a multiple of the block
                                            Params{16, 4096, 32, 0.0f, 0.02f},
+                                           Params{9, 1056, 32, 0.0f, 1.0f},      // padding, uneven last warp step
+                                           Params{3, 4096, 8, 0.0f, 1.0f},       // many small groups
                                            Params{5, 1024, 64, 3.0f, 0.1f},      // positive only
                                            Params{5, 1024, 128, -3.0f, 0.1f}));  // negative only
 
@@ -98,7 +108,7 @@ TEST(GpuGemvBasic, OneHotSelectsColumn)
 {
     SKIP_WITHOUT_GPU();
 
-    const Params p{3, 80, 16, 0.0f, 1.0f};
+    const Params p{3, 96, 32, 0.0f, 1.0f};
     const auto m = quant::cpu::quantize(make_input(p), p.rows, p.cols, p.G);
     const auto v = m.view();
 
@@ -118,7 +128,7 @@ TEST(GpuGemvBasic, RejectsWrongSizes)
 {
     SKIP_WITHOUT_GPU();
 
-    const Params p{3, 80, 16, 0.0f, 1.0f};
+    const Params p{3, 96, 32, 0.0f, 1.0f};
     const CudaMatrixQuant m(quant::cpu::quantize(make_input(p), p.rows, p.cols, p.G));
     DeviceBuffer<std::uint16_t> x(p.cols), bad_x(p.cols - 1);
     DeviceBuffer<float> y(p.rows), bad_y(p.rows + 1);
@@ -128,4 +138,18 @@ TEST(GpuGemvBasic, RejectsWrongSizes)
         EXPECT_THROW(k.fn(m, bad_x, y), std::invalid_argument) << k.name;
         EXPECT_THROW(k.fn(m, x, bad_y), std::invalid_argument) << k.name;
     }
+}
+
+TEST(GpuGemvBasic, RejectsUnsupportedG)
+{
+    SKIP_WITHOUT_GPU();
+
+    const Params p{3, 80, 16, 0.0f, 1.0f};
+    const CudaMatrixQuant m(quant::cpu::quantize(make_input(p), p.rows, p.cols, p.G));
+    DeviceBuffer<std::uint16_t> x(p.cols);
+    DeviceBuffer<float> y(p.rows);
+
+    for(const Kernel& k : kernels)
+        if(p.G % k.g_multiple != 0)
+            EXPECT_THROW(k.fn(m, x, y), std::invalid_argument) << k.name;
 }

@@ -25,6 +25,8 @@ if(QUANT_CUDA)
     add_library(quant_gpu STATIC 
                     src/gpu/gemv_naive.cu
                     src/gpu/gemv_warp.cu
+                    src/gpu/gemv_warp_xvec.cu
+                    src/gpu/gemv_warp_w4.cu
                     src/gpu/cuda_matrix_quant.cpp)
     target_link_libraries(quant_gpu PUBLIC quant CUDA::cudart)
 endif()

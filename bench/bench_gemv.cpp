@@ -32,6 +32,8 @@
 #include "gpu/device_buffer.hpp"
 #include "gpu/gemv_naive.hpp"
 #include "gpu/gemv_warp.hpp"
+#include "gpu/gemv_warp_w4.hpp"
+#include "gpu/gemv_warp_xvec.hpp"
 
 namespace
 {
@@ -311,6 +313,9 @@ void add_all(Shape shape)
     // A new kernel is added here.
     add("w4a16_naive", shape, [](benchmark::State& st, Shape s) { w4a16(st, s, quant::gpu::gemv_naive); });
     add("w4a16_warp", shape, [](benchmark::State& st, Shape s) { w4a16(st, s, quant::gpu::gemv_warp); });
+    add("w4a16_warp_xvec", shape, [](benchmark::State& st, Shape s) { w4a16(st, s, quant::gpu::gemv_warp_xvec); });
+    if(shape.G % 32 == 0)
+        add("w4a16_warp_w4", shape, [](benchmark::State& st, Shape s) { w4a16(st, s, quant::gpu::gemv_warp_w4); });
 
     add("cublas_fp16", shape, cublas_fp16);
     add("cublas_fp32", shape, cublas_fp32);
